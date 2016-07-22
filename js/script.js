@@ -77,6 +77,7 @@ function increaseBreakTime() {
 }
 
 function startSession() {
+  circle.set(0);
   var timer = sessionTimeSec, minutes, seconds;
   var timeDisplay = document.getElementById('timer');
   var opts = {
@@ -88,7 +89,6 @@ function startSession() {
     duration: 10,
     color: '#262626'
   }
-  circle.animate(1, opts);
   interval = setInterval(function () {
     minutes = parseInt(timer / 60, 10);
     seconds = parseInt(timer % 60, 10);
@@ -101,9 +101,11 @@ function startSession() {
       startBreak();
     }
   }, 1000);
+  circle.animate(1, opts);
 }
 
 function startBreak() {
+  circle.set(0);
   var timer = breakTimeSec, minutes, seconds;
   var timeDisplay = document.getElementById('timer');
   var opts = {
@@ -115,7 +117,6 @@ function startBreak() {
     duration: 10,
     color: '#262626'
   }
-  circle.animate(1, opts);
   interval = setInterval(function () {
     minutes = parseInt(timer / 60, 10);
     seconds = parseInt(timer % 60, 10);
@@ -131,6 +132,7 @@ function startBreak() {
       startSession();
     }
   }, 1000);
+  circle.animate(1, opts);
 }
 
 function start() {
@@ -139,6 +141,7 @@ function start() {
 
 function stop() {
   clearInterval(interval);
+  circle.stop();
 }
 
 function ready() {
