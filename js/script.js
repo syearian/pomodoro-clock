@@ -1,14 +1,16 @@
-var ProgressBar = require('progressbar.js');
+// var ProgressBar = require('progressbar.js');
 
 var sessionTime = 25;
-var sessionMil = sessionTime * 60000;
+var sessionTimeSec = sessionTime * 60;
+var sessionTimeMil = sessionTime * 60000;
 var breakTime = 5;
-var breakMil = breakTime * 60000;
-var timer = sessionTime + ':00';
+var breakTimeSec = breakTime * 60;
+var breakTimeMil = breakTime * 60000;
+var time = sessionTime + ':00';
 
 var sessionCircle = new ProgressBar.Circle(timerProgress, {
   strokeWidth: 6,
-  duration: sessionMil,
+  duration: sessionTimeMil,
   from: { color: '#FFB300 '},
   to: { color: '#43A047 '},
   step: function(state, bar, attachment) {
@@ -20,7 +22,7 @@ var sessionCircle = new ProgressBar.Circle(timerProgress, {
 });
 var breakCircle = new ProgressBar.Circle(timerProgress, {
   strokeWidth: 6,
-  duration: breakMil,
+  duration: breakTimeMil,
   from: { color: '#43A047 '},
   to: { color: '#FFB300 '},
   step: function(state, bar, attachment) {
@@ -32,25 +34,34 @@ var breakCircle = new ProgressBar.Circle(timerProgress, {
 });
 
 function decreaseSessionTime() {
-  sessionTime--;
-  document.getElementById('breakTime').innerText(sessionTime);
+  sessionTime = --sessionTime;
+  sessionTimeMil = sessionTime * 60000;
+  console.log(sessionTime);
+  time = sessionTime + ':00';
+  document.getElementById('sessionTime').textContent = sessionTime;
+  document.getElementById('timer').textContent = time;
 }
 function increaseSessionTime() {
-  sessionTime++;
-  document.getElementById('breakTime').innerText(sessionTime);
+  sessionTime = ++sessionTime;
+  sessionTimeMil = sessionTime * 60000;
+  time = sessionTime + ':00';
+  document.getElementById('sessionTime').textContent = sessionTime;
+  document.getElementById('timer').textContent = time;
 }
 
 function decreaseBreakTime() {
-  breakTime--;
-  document.getElementById('breakTime').innerText(breakTime);
+  breakTime = --breakTime;
+  breakTimeMil = breakTime * 60000;
+  document.getElementById('breakTime').textContent = breakTime;
 }
 function increaseBreakTime() {
-  breakTime++;
-  document.getElementById('breakTime').innerText(breakTime);
+  breakTime = ++breakTime;
+  breakTimeMil = breakTime * 60000;
+  document.getElementById('breakTime').textContent = breakTime;
 }
 
 function startSession() {
-
+  
 }
 
 function startBreak() {
@@ -70,32 +81,39 @@ function stop() {
 }
 
 function ready() {
-  document.getElementById('decreaseSession').addEventListener("click", function(event) {
+  var dSessionElem = document.getElementById('decreaseSession');
+  dSessionElem.addEventListener("click", function(event) {
       decreaseSessionTime();
   });
   
-  document.getElementById('increaseSession').addEventListener("click", function(event) {
+  var iSessionElem = document.getElementById('increaseSession');
+  iSessionElem.addEventListener("click", function(event) {
       increaseSessionTime();
   });
   
-  document.getElementById('start').addEventListener("click", function(event) {
-      decreaseBreakTime();
-  });
-  
-  document.getElementById('pause').addEventListener("click", function(event) {
-      increaseBreakTime();
-  });
-  
-  document.getElementById('stop').addEventListener("click", function(event) {
+  var startElem = document.getElementById('start');
+  startElem.addEventListener("click", function(event) {
       start();
   });
   
-  document.getElementById('decreaseBreak').addEventListener("click", function(event) {
-      pause()
+  var pauseElem = document.getElementById('pause');
+  pauseElem.addEventListener("click", function(event) {
+      pause();
   });
   
-  document.getElementById('increaseBreak').addEventListener("click", function(event) {
+  var stopElem = document.getElementById('stop');
+  stopElem.addEventListener("click", function(event) {
       stop();
+  });
+  
+  var dBreakElem = document.getElementById('decreaseBreak');
+  dBreakElem.addEventListener("click", function(event) {
+      decreaseBreakTime();
+  });
+  
+  var iBreakElem = document.getElementById('increaseBreak');
+  iBreakElem.addEventListener("click", function(event) {
+      increaseBreakTime();
   });
 }
 
