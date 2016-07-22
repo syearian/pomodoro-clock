@@ -1,5 +1,3 @@
-// var ProgressBar = require('progressbar.js');
-
 var sessionTime = 25;
 var sessionTimeSec = sessionTime * 60;
 var sessionTimeMil = sessionTime * 60000;
@@ -158,11 +156,6 @@ function ready() {
   startElem.addEventListener("click", function(event) {
       start();
   });
-  
-  // var pauseElem = document.getElementById('pause');
-  // pauseElem.addEventListener("click", function(event) {
-  //     pause();
-  // });
   
   var stopElem = document.getElementById('stop');
   stopElem.addEventListener("click", function(event) {
