@@ -6,14 +6,12 @@ var sessionTimeMil = sessionTime * 60000;
 var breakTime = 5;
 var breakTimeSec = breakTime * 60;
 var breakTimeMil = breakTime * 60000;
-var time = sessionTime + ':00';
 var interval;
+var sessionEndSound = new Audio('assets/Store_Door_Chime-Mike_Koenig-570742973.mp3');
+var breakEndSound = new Audio('assets/Car Door Open And Alarm-SoundBible.com-1790760048.mp3');
 
-var sessionCircle = new ProgressBar.Circle(timerProgress, {
+var circle = new ProgressBar.Circle(timerProgress, {
   strokeWidth: 6,
-  duration: sessionTimeMil,
-  from: { color: '#FFB300 '},
-  to: { color: '#43A047 '},
   step: function(state, bar, attachment) {
     bar.path.setAttribute('stroke', state.color);
   },
@@ -27,16 +25,14 @@ function decreaseSessionTime() {
     sessionTime = --sessionTime;
     sessionTimeSec = sessionTime * 60;
     sessionTimeMil = sessionTime * 60000;
-    time = sessionTime + ':00';
     document.getElementById('sessionTime').textContent = sessionTime;
-    document.getElementById('timer').textContent = time;
+    document.getElementById('timer').textContent = sessionTime + ':00';
   } else if (sessionTime === 1) {
     sessionTime = 50;
     sessionTimeSec = sessionTime * 60;
     sessionTimeMil = sessionTime * 60000;
-    time = sessionTime + ':00';
     document.getElementById('sessionTime').textContent = sessionTime;
-    document.getElementById('timer').textContent = time;
+    document.getElementById('timer').textContent = sessionTime + ':00';
   }
 }
 function increaseSessionTime() {
@@ -44,16 +40,14 @@ function increaseSessionTime() {
     sessionTime = ++sessionTime;
     sessionTimeSec = sessionTime * 60;
     sessionTimeMil = sessionTime * 60000;
-    time = sessionTime + ':00';
     document.getElementById('sessionTime').textContent = sessionTime;
-    document.getElementById('timer').textContent = time;
+    document.getElementById('timer').textContent = sessionTime + ':00';
   } else if (sessionTime === 50) {
     sessionTime = 1;
     sessionTimeSec = sessionTime * 60;
     sessionTimeMil = sessionTime * 60000;
-    time = sessionTime + ':00';
     document.getElementById('sessionTime').textContent = sessionTime;
-    document.getElementById('timer').textContent = time;
+    document.getElementById('timer').textContent = sessionTime + ':00';
   }
 }
 
@@ -87,15 +81,24 @@ function increaseBreakTime() {
 function startSession() {
   var timer = sessionTimeSec, minutes, seconds;
   var timeDisplay = document.getElementById('timer');
+  var opts = {
+    duration: sessionTimeMil,
+    from: { color: '#FFB300 '},
+    to: { color: '#43A047 '}
+  }
+  var endOpts = {
+    duration: 10,
+    color: '#262626'
+  }
+  circle.animate(1, opts);
   interval = setInterval(function () {
     minutes = parseInt(timer / 60, 10);
     seconds = parseInt(timer % 60, 10);
-
     seconds = seconds < 10 ? "0" + seconds : seconds;
-
     timeDisplay.textContent = minutes + ":" + seconds;
-
     if (--timer < 0) {
+      sessionEndSound.play();
+      circle.set(0);
       clearInterval(interval);
       startBreak();
     }
@@ -105,6 +108,16 @@ function startSession() {
 function startBreak() {
   var timer = breakTimeSec, minutes, seconds;
   var timeDisplay = document.getElementById('timer');
+  var opts = {
+    duration: breakTimeMil,
+    from: { color: '#43A047'},
+    to: { color: '#FFB300'}
+  }
+  var endOpts = {
+    duration: 10,
+    color: '#262626'
+  }
+  circle.animate(1, opts);
   interval = setInterval(function () {
     minutes = parseInt(timer / 60, 10);
     seconds = parseInt(timer % 60, 10);
@@ -114,6 +127,8 @@ function startBreak() {
     timeDisplay.textContent = minutes + ":" + seconds;
 
     if (--timer < 0) {
+      breakEndSound.play();
+      circle.set(0);
       clearInterval(interval);
       startSession();
     }
@@ -122,10 +137,6 @@ function startBreak() {
 
 function start() {
   startSession();
-}
-
-function pause() {
-  
 }
 
 function stop() {
@@ -148,10 +159,10 @@ function ready() {
       start();
   });
   
-  var pauseElem = document.getElementById('pause');
-  pauseElem.addEventListener("click", function(event) {
-      pause();
-  });
+  // var pauseElem = document.getElementById('pause');
+  // pauseElem.addEventListener("click", function(event) {
+  //     pause();
+  // });
   
   var stopElem = document.getElementById('stop');
   stopElem.addEventListener("click", function(event) {
