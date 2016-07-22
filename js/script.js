@@ -33,16 +33,20 @@ var breakCircle = new ProgressBar.Circle(timerProgress, {
 
 function decreaseSessionTime() {
   sessionTime--;
+  document.getElementById('breakTime').innerText(sessionTime);
 }
 function increaseSessionTime() {
   sessionTime++;
+  document.getElementById('breakTime').innerText(sessionTime);
 }
 
 function decreaseBreakTime() {
   breakTime--;
+  document.getElementById('breakTime').innerText(breakTime);
 }
 function increaseBreakTime() {
   breakTime++;
+  document.getElementById('breakTime').innerText(breakTime);
 }
 
 function startSession() {
