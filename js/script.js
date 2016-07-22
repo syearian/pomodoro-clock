@@ -77,7 +77,6 @@ function increaseBreakTime() {
 }
 
 function startSession() {
-  circle.set(0);
   var timer = sessionTimeSec, minutes, seconds;
   var timeDisplay = document.getElementById('timer');
   var opts = {
@@ -101,7 +100,6 @@ function startSession() {
 }
 
 function startBreak() {
-  circle.set(0);
   var timer = breakTimeSec, minutes, seconds;
   var timeDisplay = document.getElementById('timer');
   var opts = {
@@ -133,7 +131,8 @@ function start() {
 
 function stop() {
   clearInterval(interval);
-  circle.stop();
+  circle.set(0);
+  document.getElementById('timer').textContent = sessionTime + ':00';
 }
 
 function ready() {
