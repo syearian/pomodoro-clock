@@ -20,36 +20,41 @@ var sessionCircle = new ProgressBar.Circle(timerProgress, {
   trailColor: '#eee',
   trailWidth: 1,
   svgStyle: null
-});
-var breakCircle = new ProgressBar.Circle(timerProgress, {
-  strokeWidth: 6,
-  duration: breakTimeMil,
-  from: { color: '#43A047 '},
-  to: { color: '#FFB300 '},
-  step: function(state, bar, attachment) {
-    bar.path.setAttribute('stroke', state.color);
-  },
-  trailColor: '#eee',
-  trailWidth: 1,
-  svgStyle: null
-});
+}); 
 
 function decreaseSessionTime() {
-  sessionTime = --sessionTime;
-  sessionTimeSec = sessionTime * 60;
-  sessionTimeMil = sessionTime * 60000;
-  console.log(sessionTime);
-  time = sessionTime + ':00';
-  document.getElementById('sessionTime').textContent = sessionTime;
-  document.getElementById('timer').textContent = time;
+  if (sessionTime > 1) {
+    sessionTime = --sessionTime;
+    sessionTimeSec = sessionTime * 60;
+    sessionTimeMil = sessionTime * 60000;
+    time = sessionTime + ':00';
+    document.getElementById('sessionTime').textContent = sessionTime;
+    document.getElementById('timer').textContent = time;
+  } else if (sessionTime === 1) {
+    sessionTime = 50;
+    sessionTimeSec = sessionTime * 60;
+    sessionTimeMil = sessionTime * 60000;
+    time = sessionTime + ':00';
+    document.getElementById('sessionTime').textContent = sessionTime;
+    document.getElementById('timer').textContent = time;
+  }
 }
 function increaseSessionTime() {
-  sessionTime = ++sessionTime;
-  sessionTimeSec = sessionTime * 60;
-  sessionTimeMil = sessionTime * 60000;
-  time = sessionTime + ':00';
-  document.getElementById('sessionTime').textContent = sessionTime;
-  document.getElementById('timer').textContent = time;
+  if (sessionTime < 50) {
+    sessionTime = ++sessionTime;
+    sessionTimeSec = sessionTime * 60;
+    sessionTimeMil = sessionTime * 60000;
+    time = sessionTime + ':00';
+    document.getElementById('sessionTime').textContent = sessionTime;
+    document.getElementById('timer').textContent = time;
+  } else if (sessionTime === 50) {
+    sessionTime = 1;
+    sessionTimeSec = sessionTime * 60;
+    sessionTimeMil = sessionTime * 60000;
+    time = sessionTime + ':00';
+    document.getElementById('sessionTime').textContent = sessionTime;
+    document.getElementById('timer').textContent = time;
+  }
 }
 
 function decreaseBreakTime() {
