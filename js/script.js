@@ -85,10 +85,6 @@ function startSession() {
     from: { color: '#FFB300 '},
     to: { color: '#43A047 '}
   }
-  var endOpts = {
-    duration: 10,
-    color: '#262626'
-  }
   interval = setInterval(function () {
     minutes = parseInt(timer / 60, 10);
     seconds = parseInt(timer % 60, 10);
@@ -112,10 +108,6 @@ function startBreak() {
     duration: breakTimeMil,
     from: { color: '#43A047'},
     to: { color: '#FFB300'}
-  }
-  var endOpts = {
-    duration: 10,
-    color: '#262626'
   }
   interval = setInterval(function () {
     minutes = parseInt(timer / 60, 10);
