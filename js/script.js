@@ -57,7 +57,7 @@ function startBreak() {
   
 }
 
-function play() {
+function start() {
   
 }
 
@@ -68,3 +68,40 @@ function pause() {
 function stop() {
   
 }
+
+function ready() {
+  document.getElementById('decreaseSession').addEventListener("click", function(event) {
+      decreaseSessionTime();
+  });
+  
+  document.getElementById('increaseSession').addEventListener("click", function(event) {
+      increaseSessionTime();
+  });
+  
+  document.getElementById('start').addEventListener("click", function(event) {
+      decreaseBreakTime();
+  });
+  
+  document.getElementById('pause').addEventListener("click", function(event) {
+      increaseBreakTime();
+  });
+  
+  document.getElementById('stop').addEventListener("click", function(event) {
+      start();
+  });
+  
+  document.getElementById('decreaseBreak').addEventListener("click", function(event) {
+      pause()
+  });
+  
+  document.getElementById('increaseBreak').addEventListener("click", function(event) {
+      stop();
+  });
+}
+
+var everythingLoaded = setInterval(function() {
+  if (/loaded|complete/.test(document.readyState)) {
+    clearInterval(everythingLoaded);
+    ready(); // this is the function that gets called when everything is loaded
+  }
+}, 10);
