@@ -58,16 +58,30 @@ function increaseSessionTime() {
 }
 
 function decreaseBreakTime() {
-  breakTime = --breakTime;
-  breakTimeSec = breakTime * 60;
-  breakTimeMil = breakTime * 60000;
-  document.getElementById('breakTime').textContent = breakTime;
+  if (breakTime > 1) {    
+    breakTime = --breakTime;
+    breakTimeSec = breakTime * 60;
+    breakTimeMil = breakTime * 60000;
+    document.getElementById('breakTime').textContent = breakTime;
+  } else if (breakTime === 1) {
+    breakTime = 10;
+    breakTimeSec = breakTime * 60;
+    breakTimeMil = breakTime * 60000;
+    document.getElementById('breakTime').textContent = breakTime;
+  }
 }
 function increaseBreakTime() {
-  breakTime = ++breakTime;
-  breakTimeSec = breakTime * 60;
-  breakTimeMil = breakTime * 60000;
-  document.getElementById('breakTime').textContent = breakTime;
+  if (breakTime < 10) {
+    breakTime = ++breakTime;
+    breakTimeSec = breakTime * 60;
+    breakTimeMil = breakTime * 60000;
+    document.getElementById('breakTime').textContent = breakTime;
+  } else if (breakTime === 10) {
+    breakTime = 1;
+    breakTimeSec = breakTime * 60;
+    breakTimeMil = breakTime * 60000;
+    document.getElementById('breakTime').textContent = breakTime;
+  }
 }
 
 function startSession() {
