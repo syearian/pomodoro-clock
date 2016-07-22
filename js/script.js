@@ -30,3 +30,37 @@ var breakCircle = new ProgressBar.Circle(timerProgress, {
   trailWidth: 1,
   svgStyle: null
 });
+
+function decreaseSessionTime() {
+  sessionTime--;
+}
+function increaseSessionTime() {
+  sessionTime++;
+}
+
+function decreaseBreakTime() {
+  breakTime--;
+}
+function increaseBreakTime() {
+  breakTime++;
+}
+
+function startSession() {
+
+}
+
+function startBreak() {
+  
+}
+
+function play() {
+  
+}
+
+function pause() {
+  
+}
+
+function stop() {
+  
+}
