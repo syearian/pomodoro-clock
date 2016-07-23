@@ -31,7 +31,7 @@ body {
 }
 
 main {
-  width: 50%;
+  width: 95%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -89,4 +89,12 @@ button.changeTime {
   left: 33%;
   margin-top: 120px;
   font-size: 3em;
+}
+
+@media only screen and (min-width: 760px) {
+  main {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
