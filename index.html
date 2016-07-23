@@ -6,17 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pomodoro Clock</title>
     <link href="https://fonts.googleapis.com/css?family=Lato|Oswald" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     
 
     <main>
       
-      
-      
-    </main> <!-- End Main -->
+      <header>
+        <h1>Pomodoro Clock</h1>
+      </header>
 
-    <script src="script.js"></script>
+      <!-- Settings Section -->
+      <section id="settings">
+        <div>
+          <h5>Session Length</h5>
+          <div id="session">
+	          <button id="decreaseSession" class="changeTime">-</button>
+	          <p id="sessionTime">25</p>
+	          <button id="increaseSession" class="changeTime">+</button>
+	        </div>
+        </div>	
+        <div>
+          <div id="controls">
+	          <button id="start"><i class="fa fa-play-circle fa-2x" aria-hidden="true"></i></button>
+	          <button id="stop"><i class="fa fa-stop-circle fa-2x" aria-hidden="true"></i></button>
+	        </div>
+        </div>	
+        <div>
+          <h5>Break Length</h5>
+          <div id="break">
+	          <button id="decreaseBreak" class="changeTime">-</button>
+	          <p id="breakTime">5</p>
+	          <button id="increaseBreak" class="changeTime">+</button>
+	        </div>
+        </div>	
+      </section>
+
+      <!-- Timer Section -->
+      <section id="timerProgress">
+        <p id="timer">25:00</p>
+      </section>
+      
+    </main>
+
+    <script src="https://use.fontawesome.com/5658325831.js"></script>
+    <script src="js/progressbar.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
